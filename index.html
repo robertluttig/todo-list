@@ -6,6 +6,14 @@
     <title>Document</title>
 </head>
 <body>
-    <h1>Hi there!</h1>
+    <div class="todos">
+        <form id="todo-form" method="POST">
+          <label for="todo-text">Add a Todo:</label>
+          <input type="text" placeholder="What needs to be done?" name="todo-text" id="todo-text" />
+        </form>
+        <p>Todo Count: <span id="todo-count">0</span></p>
+        <ul id="todo-list"></ul>
+      </div>
+      <script src="./script.js"></script>
 </body>
 </html>
