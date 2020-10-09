@@ -20,10 +20,17 @@ function renderTodos() {
         console.log(todo)
             // create an li element for each index of the array
         var li = document.createElement("li");
+        // create a buttom for each index of the array
+        var btn = document.createElement("button");
+        btn.textContent = "Complete";
         // set the content of the li to the value of the current array index
         li.textContent = todo;
-        // the li should be appended to `todoList`
+        //set the data-index for each li element
+        li.setAttribute('data-index', i);
+        // li appended to `todoList`
         todoList.appendChild(li);
+        // button appended to `li element`
+        li.appendChild(btn);
     }
 }
 
@@ -44,4 +51,18 @@ function renderTodos() {
   
     // Re-render the list
         renderTodos();
+    });
+
+    todoList.addEventListener("click",function(event){
+        var element = event.target;
+
+    // If that element is a button...
+    if (element.matches("button")) {
+        // Get its data-index value and remove the todo element from the list
+        var index = element.parentElement.getAttribute("data-index");
+        todos.splice(index, 1);
+
+        // Re-render the list
+        renderTodos();
+     }
     });
