@@ -5,7 +5,20 @@ let todoCountSpan = document.querySelector("#todo-count");
 
 let todos = [];
 
+init();
 
+function init() {
+  // retrieve the todos 
+  var storedTodos = JSON.parse(localStorage.getItem("todos"));
+
+  // If todos were retrieved from localStorage, update the todos array to it
+  if (storedTodos !== null) {
+    todos = storedTodos;
+  }
+
+  // Render todos to the DOM
+  renderTodos();
+}
 
 function renderTodos() {
     // set the text content of the `todoList` to an empty string.
@@ -34,6 +47,11 @@ function renderTodos() {
     }
 }
 
+function storeTodos() {
+    // stringify  todos array and save it to the "todos" key
+    localStorage.setItem("todos", JSON.stringify(todos));
+    }
+
   // When form is submitted...
     todoForm.addEventListener("submit", function(event) {
         event.preventDefault();
@@ -48,7 +66,9 @@ function renderTodos() {
     // Add new todoText to todos array, clear the input
         todos.push(todoText);
         todoInput.value = "";
-  
+        
+    // Store updated todos in localStorage
+        storeTodos();
     // Re-render the list
         renderTodos();
     });
